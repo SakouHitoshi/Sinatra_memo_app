@@ -1,2 +1,16 @@
-<h1>詳細</h1>
-<a href="/">ホームへ</a>
+<div class="show-title">
+  <h1>メモタイトル</h>
+    <p><%= h(@memo[:title]) %></p>
+  <h1>内容</h1>
+    <p><%= h(@memo[:content]) %></p>
+  <form action="/memos/<%= @memo[:id] %>/edit" method="get">
+    <input type="submit" value="編集">
+  </form>
+  <form action="/memos/<%= @memo[:id] %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="削除">
+  </form>
+  <form action="/" method="get">
+    <input type="submit"  value="メモ一覧へ">
+  </form>
+</div>

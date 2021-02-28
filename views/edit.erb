@@ -1,3 +1,13 @@
-<h1>変更</h1>
-<a href="/">ホームへ</a>
-  
+<form action="/memos/<%= @memo[:id] %>" method="post">
+  <div class="edit-title">
+    <h1>メモタイトル</h1>
+    <div>
+      <input type="text" class="form" name= "title" value=<%= h(@memo[:title]) %> required>
+    </div>
+    <h1>内容</h1>
+    <textarea name="content" required><%= h(@memo[:content]) %></textarea>
+    <input type="hidden" name="_method" value="PATCH">
+    <div class="edit-btn">
+      <input type="submit" value="編集完了">
+    </div>
+  <div>

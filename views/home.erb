@@ -1,2 +1,11 @@
-<h1>メモアプリ</h1>
-<a href="/show">メモタイトル</a>
+<div class="home-title">
+  <h1>メモ一覧</h1>
+  <ul class="memos">
+    <% @memos.each do |memo|  %>
+      <li><a href="/memos/<%= memo[:id] %>"><%= h(memo[:title]) %></a></li>
+    <% end %>
+  </ul>
+  <form action="/memos/new" method="get">
+    <input type="submit" value="追加">
+  </form>
+</div>
