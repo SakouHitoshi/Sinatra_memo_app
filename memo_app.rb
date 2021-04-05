@@ -37,7 +37,7 @@ post '/memos/new' do
 end
 
 def filename_match?
-  filename = File.basename(params[:id])
+  File.basename(params[:id])
 end
 
 get '/memos/:id' do
