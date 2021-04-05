@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
@@ -16,15 +18,15 @@ get '/' do
   redirect '/memos'
 end
 
-get "/memos" do
-  @title = "メモ一覧"
-  files = Dir.glob("memos/*").sort_by { |file| File.mtime(file) }
-  @memos = files.map { |file| JSON.parse(File.read(file), symbolize_names: true)}
+get '/memos' do
+  @title = 'メモ一覧'
+  files = Dir.glob('memos/*').sort_by { |file| File.mtime(file) }
+  @memos = files.map { |file| JSON.parse(File.read(file), symbolize_names: true) }
   erb :home
 end
 
 get '/memos/new' do
-  @title = "メモ作成"
+  @title = 'メモ作成'
   erb :new
 end
 
@@ -34,19 +36,23 @@ post '/memos/new' do
   redirect '/memos'
 end
 
+def filename_match?
+  filename = File.basename(params[:id])
+end
+
 get '/memos/:id' do
   @title = 'メモ詳細'
-  @memo = JSON.parse(File.read("memos/#{params[:id]}.json"), symbolize_names: true)
+  @memo = JSON.parse(File.read("memos/#{filename_match?}.json"), symbolize_names: true)
   erb :show
 end
 
 get '/memos/:id/edit' do
   @title = 'メモ内容変更'
-  @memo = JSON.parse(File.read("memos/#{params[:id]}.json"), symbolize_names: true)
+  @memo = JSON.parse(File.read("memos/#{filename_match?}.json"), symbolize_names: true)
   erb :edit
 end
 
-patch "/memos/:id" do
+patch '/memos/:id' do
   File.open("memos/#{params[:id]}.json", 'w') do |file|
     hash = { id: params[:id], title: params[:title], content: params[:content] }
     JSON.dump(hash, file)
@@ -55,6 +61,6 @@ patch "/memos/:id" do
 end
 
 delete '/memos/:id' do
-  File.delete("memos/#{params[:id]}.json")
+  File.delete("memos/#{filename_match?}.json")
   redirect '/memos'
 end

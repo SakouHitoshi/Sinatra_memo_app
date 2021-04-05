@@ -1,8 +1,6 @@
 <div class="show-title">
-  <h1>メモタイトル</h>
-    <p><%= h(@memo[:title]) %></p>
-  <h1>内容</h1>
-    <p><%= h(@memo[:content]) %></p>
+  <h1>メモタイトル</h><p><%= h(@memo[:title]) %></p>
+  <h1>内容</h1><p><%= h(@memo[:content]) %></p>
   <form action="/memos/<%= @memo[:id] %>/edit" method="get">
     <input type="submit" value="編集">
   </form>
