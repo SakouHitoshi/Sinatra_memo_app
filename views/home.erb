@@ -1,5 +1,5 @@
 <div class="home-title">
-  <h1>メモ一覧</h1>
+  <h2>メモ一覧</h2>
   <ul class="memos">
     <% @memos.each do |memo|  %>
       <li><a href="/memos/<%= memo[:id] %>"><%= h(memo[:title]) %></a></li>
