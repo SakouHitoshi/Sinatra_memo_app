@@ -36,19 +36,19 @@ post '/memos/new' do
   redirect '/memos'
 end
 
-def filename_match?
+def specify_a_file
   File.basename(params[:id])
 end
 
 get '/memos/:id' do
   @title = 'メモ詳細'
-  @memo = JSON.parse(File.read("memos/#{filename_match?}.json"), symbolize_names: true)
+  @memo = JSON.parse(File.read("memos/#{specify_a_file}.json"), symbolize_names: true)
   erb :show
 end
 
 get '/memos/:id/edit' do
   @title = 'メモ内容変更'
-  @memo = JSON.parse(File.read("memos/#{filename_match?}.json"), symbolize_names: true)
+  @memo = JSON.parse(File.read("memos/#{specify_a_file}.json"), symbolize_names: true)
   erb :edit
 end
 
@@ -61,6 +61,6 @@ patch '/memos/:id' do
 end
 
 delete '/memos/:id' do
-  File.delete("memos/#{filename_match?}.json")
+  File.delete("memos/#{specify_a_file}.json")
   redirect '/memos'
 end
