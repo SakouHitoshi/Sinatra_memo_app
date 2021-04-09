@@ -1,0 +1,36 @@
+ .main-title h1 {
+   text-align: center;
+ }
+
+.home-title {
+  text-align: center;
+}
+.home-title h1 {
+  font-size: 40px;
+}
+.memos {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-to {
+  text-align: center;
+}
+
+.new-title {
+  text-align: center;
+}
+
+.show-title {
+  text-align: center;
+}
+
+.show-title p {
+  font-size: 20px;
+}
+
+
+.edit-title {
+  text-align: center;
+}
