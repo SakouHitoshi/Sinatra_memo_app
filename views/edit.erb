@@ -1,11 +1,11 @@
-<form action="/memos/<%= @memo[:id] %>" method="post">
+<form action="/memos/<%= @memo[0]['id'] %>" method="post">
   <div class="edit-title">
     <h2>メモタイトル</h2>
     <div>
-      <input type="text" class="form" name= "title" value=<%= h(@memo[:title]) %> required>
+      <input type="text" class="form" name= "title" value=<%= h(@memo[0]['title']) %> required>
     </div>
     <h2>内容</h2>
-    <textarea name="content" required><%= h(@memo[:content]) %></textarea>
+    <textarea name="content" required><%= h(@memo[0]['content']) %></textarea>
     <input type="hidden" name="_method" value="PATCH">
     <div class="edit-btn">
       <input type="submit" value="編集完了">
