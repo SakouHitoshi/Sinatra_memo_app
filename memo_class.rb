@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Memo
   # DBに接続し、@connectionにセット
   def initialize
@@ -13,6 +15,7 @@ class Memo
   def read(id)
     @connection.exec('SELECT * FROM memos WHERE id = $1', [id])
   end
+
   # 受け取ったidを編集する
   def memo_edit(title, content, id)
     @connection.exec('UPDATE memos SET title = $1, content = $2 WHERE id= $3', [title, content, id])

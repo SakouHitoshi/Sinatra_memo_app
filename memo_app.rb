@@ -6,7 +6,6 @@ require 'json'
 require 'pg'
 require './memo_class'
 
-
 helpers do
   def h(text)
     Rack::Utils.escape_html(text)
