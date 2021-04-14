@@ -3,7 +3,7 @@
 class Memo
   # DBに接続し、@connectionにセット
   def initialize
-    @connection = PG.connect(dbname: 'sinatra_memos')
+    @connection = PG.connect(dbname: ENV['DATABASE'])
   end
 
   # memosテーブルの全情報取得
