@@ -36,7 +36,7 @@ get '/memos/new' do
 end
 
 post '/memos/new' do
-  memo_data.memo_create(params[:title], params[:content])
+  memo_data.create(params[:title], params[:content])
   redirect '/memos'
 end
 
@@ -51,7 +51,7 @@ get '/memos/:id/edit' do
 end
 
 patch '/memos/:id' do
-  memo_data.memo_edit(params[:title], params[:content], params[:id])
+  memo_data.edit(params[:title], params[:content], params[:id])
   redirect "/memos/#{params[:id]}"
 end
 

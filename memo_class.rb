@@ -17,12 +17,12 @@ class Memo
   end
 
   # 受け取ったidを編集する
-  def memo_edit(title, content, id)
+  def edit(title, content, id)
     @connection.exec('UPDATE memos SET title = $1, content = $2 WHERE id= $3', [title, content, id])
   end
 
   # 新しいメモを作成
-  def memo_create(title, content)
+  def create(title, content)
     @connection.exec('INSERT INTO memos(id, title, content) VALUES (DEFAULT, $1, $2)', [title, content])
   end
 
