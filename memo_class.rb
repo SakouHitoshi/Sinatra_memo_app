@@ -13,7 +13,7 @@ class Memo
 
   # 受け取ったidの情報取得
   def read(id)
-    @connection.exec('SELECT * FROM memos WHERE id = $1', [id])
+    @connection.exec('SELECT * FROM memos WHERE id = $1', [id]).first
   end
 
   # 受け取ったidを編集する
