@@ -3,6 +3,8 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
+require 'pg'
+require './memo_class'
 
 helpers do
   def h(text)
@@ -18,10 +20,13 @@ get '/' do
   redirect '/memos'
 end
 
+def memo
+  Memo.new
+end
+
 get '/memos' do
   @title = 'メモ一覧'
-  files = Dir.glob('memos/*').sort_by { |file| File.mtime(file) }
-  @memos = files.map { |file| JSON.parse(File.read(file), symbolize_names: true) }
+  @memos = memo.read_all
   erb :home
 end
 
@@ -31,36 +36,26 @@ get '/memos/new' do
 end
 
 post '/memos/new' do
-  hash = { id: SecureRandom.uuid, title: params[:title], content: params[:content] }
-  File.open("memos/#{hash[:id]}.json", 'w') { |file| file.puts JSON.generate(hash) }
+  memo.create(params[:title], params[:content])
   redirect '/memos'
 end
 
-def json_file_path
-  "memos/#{File.basename(params[:id])}.json"
-end
-
 get '/memos/:id' do
-  @title = 'メモ詳細'
-  @memo = JSON.parse(File.read(json_file_path), symbolize_names: true)
+  @memo = memo.read(params[:id])
   erb :show
 end
 
 get '/memos/:id/edit' do
-  @title = 'メモ内容変更'
-  @memo = JSON.parse(File.read(json_file_path), symbolize_names: true)
+  @memo = memo.read(params[:id])
   erb :edit
 end
 
 patch '/memos/:id' do
-  File.open(json_file_path, 'w') do |file|
-    hash = { id: params[:id], title: params[:title], content: params[:content] }
-    JSON.dump(hash, file)
-  end
+  memo.edit(params[:title], params[:content], params[:id])
   redirect "/memos/#{params[:id]}"
 end
 
 delete '/memos/:id' do
-  File.delete(json_file_path)
+  memo.delete(params[:id])
   redirect '/memos'
 end

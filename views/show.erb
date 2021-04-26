@@ -1,10 +1,10 @@
 <div class="show-title">
-  <h2>メモタイトル</h2><p><%= h(@memo[:title]) %></p>
-  <h2>内容</h2><p><%= h(@memo[:content]) %></p>
-  <form action="/memos/<%= @memo[:id] %>/edit" method="get">
+  <h2>メモタイトル</h2><p><%= h(@memo['title']) %></p>
+  <h2>内容</h2><p><%= h(@memo['content']) %></p>
+  <form action="/memos/<%= @memo['id'] %>/edit" method="get">
     <input type="submit" value="編集">
   </form>
-  <form action="/memos/<%= @memo[:id] %>" method="post">
+  <form action="/memos/<%= @memo['id'] %>" method="post">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="削除">
   </form>
