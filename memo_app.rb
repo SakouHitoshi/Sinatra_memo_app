@@ -20,13 +20,13 @@ get '/' do
   redirect '/memos'
 end
 
-def memo_data
+def memo
   Memo.new
 end
 
 get '/memos' do
   @title = 'メモ一覧'
-  @memos = memo_data.read_all
+  @memos = memo.read_all
   erb :home
 end
 
@@ -36,26 +36,26 @@ get '/memos/new' do
 end
 
 post '/memos/new' do
-  memo_data.create(params[:title], params[:content])
+  memo.create(params[:title], params[:content])
   redirect '/memos'
 end
 
 get '/memos/:id' do
-  @memo = memo_data.read(params[:id])
+  @memo = memo.read(params[:id])
   erb :show
 end
 
 get '/memos/:id/edit' do
-  @memo = memo_data.read(params[:id])
+  @memo = memo.read(params[:id])
   erb :edit
 end
 
 patch '/memos/:id' do
-  memo_data.edit(params[:title], params[:content], params[:id])
+  memo.edit(params[:title], params[:content], params[:id])
   redirect "/memos/#{params[:id]}"
 end
 
 delete '/memos/:id' do
-  memo_data.delete(params[:id])
+  memo.delete(params[:id])
   redirect '/memos'
 end
